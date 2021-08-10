@@ -1,0 +1,515 @@
+\documentclass[11pt]{article}
+
+% Misc packages
+\usepackage{ifthen}
+\usepackage{xspace}
+\usepackage{ifpdf}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Colors
+\usepackage[table]{xcolor}
+\definecolor{lightgray}{gray}{0.8}
+\definecolor{mediumgray}{gray}{0.6}
+\definecolor{darkgray}{gray}{0.4}
+\definecolor{dku-blue}{HTML}{003A81}
+\definecolor{dku-green}{HTML}{006F3F}
+
+% Fonts
+\usepackage[no-math]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\defaultfontfeatures{Mapping=tex-text,Numbers=Lining}
+\newfontfamily\cnfont{Hiragino Sans GB}
+\AtBeginDocument{%
+  \setmainfont{Calibri}%
+  \setsansfont[
+    BoldFont={Calibri}]{Calibri}%
+  \raggedbottom%
+}
+
+% Multi-language support
+\usepackage{polyglossia}
+\setmainlanguage{english}
+
+% Links
+\usepackage{url}
+\renewcommand{\UrlBreaks}{\do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\>\do\]%
+ \do\)\do\,\do\?\do\'\do+\do\=\do\#\do\-}
+\renewcommand{\UrlFont}{\normalfont}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\hypersetup{%
+  pdfauthor=Konstantinos Efstathiou,%
+  pdftitle=MATH 303 Syllabus}
+
+% Geometry
+\usepackage[a4paper,
+includehead,tmargin=2cm,nohead,
+hmargin=2cm,
+includefoot,foot=1.5cm,bmargin=2cm]{geometry}
+
+% Tabular
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\newcommand\gvrule{\color{lightgray}\vrule width 0.5pt}
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+
+% Misc
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{hanging}
+
+\newcommand{\push}{\hangpara{2em}{1}}
+
+% Section titles
+\usepackage{titlesec}
+\titleformat{\section}{\raggedright\large\bfseries\color{dku-blue}}{}{0em}{}[{\titlerule[\heavyrulewidth]}]
+\titleformat{\subsection}{\raggedright\itshape\color{dku-blue}}{}{0em}{}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tabularx}{\textwidth}{Xm{6cm}}
+\arrayrulecolor{dku-blue}\toprule\vspace{6pt}
+{\bfseries\color{dku-blue}
+ {\Large MATH 303} \newline\newline
+ {\huge ODE and Dynamical Systems} \newline\newline
+ {\Large Fall 2021, Session 3}} 
+& \includegraphics[width=6cm]{dku-logo} \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1em}
+
+\begin{tabularx}{\textwidth}{X}
+\arrayrulecolor{dku-blue}\toprule
+\textbf{Class meeting time:} Monday to Thursday 11:45 – 13:00 (China Standard Time) in IB 1010 \\
+\textbf{Zoom:} ID: 914 5776 4357; Passcode: 209793; \href{https://duke.zoom.us/j/91457764357?pwd=cUJ3MndHajlVRzN6bWRkNlpwd2x5Zz09}{[Link]} \\
+\textbf{Teams:} \\
+\textbf{Academic credit:} 4 DKU credits \\
+\textbf{Course format:} Lectures, discussion, in-class labs \\
+\bottomrule
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Course Instructor}
+
+\textbf{Instructor:} Konstantinos Efstathiou, PhD \\
+\textbf{Office:} IB 1020 \\
+\textbf{Office hours:} Monday and Wednesday 10:00 – 11:00 or on Zoom by appointment \\
+\textbf{E-mail address:} k.efstathiou@dukekunshan.edu.cn \\
+\textbf{Personal website:} \url{https://efstathiou.gr/}
+
+\textbf{Short bio:} Dr. Efstathiou fell in love with dynamical systems after reading, as an undergraduate student, Gleick's \emph{Chaos} and Arnold's \emph{Ordinary Differential Equations}. He studied physics all the way up to his PhD, focusing on the more mathematical aspects of physics, especially those related to dynamics and geometry. After his PhD, he has worked in the Mathematics departments of the University of Groningen and the Xi'an Jiaotong Liverpool University. His research concerns the geometric aspects of Hamiltonian dynamical systems and the behavior of dynamical systems on networks.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What is this course about?}
+
+Differential equations and dynamical systems are essential mathematical tools for modeling a large variety of phenomena. They are used in Physics, Chemistry, Biology, Ecology, Finance, Sociology, and beyond, to describe various processes. However, differential equations in most cases cannot be solved and we need to use qualitative methods in order to understand such processes. 
+
+In this course we will do two things. First, we will see how to solve some \textbf{first-order} differential equations and \textbf{linear} differential equations. The fact that such differential equations can be solved makes them very special. Second, we will consider \textbf{nonlinear} differential equations. In general, these cannot be solved, and therefore we will need to qualitatively understand the behavior of the solutions, without actually finding them. To achieve this, we will combine our knowledge of the solutions of linear differential equations with other theoretical results from the theory of dynamical systems. 
+
+This course uses results from single- and multi-variable Calculus and from Linear Algebra and it is a prime example of how such results can be applied in more complicated contexts with a wide range of applications in other scientific domains. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What background knowledge do I need before taking this course?}
+
+There are two prerequisite courses:
+\begin{itemize}[label={-},noitemsep]
+\item MATH 201 Multivariable Calculus.
+\item MATH 202 Linear Algebra.
+\end{itemize}
+
+Moreover, it will be useful (but not strictly required) to have some prior familiarity with:
+\begin{itemize}[label={-},noitemsep]
+\item LaTeX.
+\item Structured programming (loops, conditionals, functions, etc.) in any programming language.
+\item Mathematica.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What will I learn in this course?}
+
+After successfully completing the course students will be able to:
+
+\begin{enumerate}[label={\arabic*.},noitemsep]
+\item define the basic theoretical concepts of differential equations and dynamical systems;
+\item distinguish between different types of dynamical systems and dynamical behavior;
+\item prove the basic theoretical results on differential equations and dynamical systems;
+\item describe the dynamics of a system given its phase portrait;
+\item solve first order differential equations and linear systems of differential equations;
+\item calculate the linearization at an equilibrium;
+\item determine the dynamics and transient vs asymptotic behavior of specific systems;
+\item classify linear and nonlinear dynamics in terms of stability and asymptotic behavior;
+\item determine the best approach for understanding the dynamics of specific systems (e.g., solving the equations vs using qualitative approaches);
+\item formulate a study-plan and research questions for studying the dynamics of specific systems.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{What will I do in this course?}
+
+The course consists of lectures, computer labs, and an applied project. 
+
+During the lectures the instructor will review the main relevant ideas and, in some cases, delve into more technical aspects of the topic. You are expected to have studied the material for each lecture as contained in this syllabus and as it will be communicated to you through Sakai. The purpose of the lectures is to help you get oriented in the vast field of dynamical systems by presenting the main ideas, how they are related to each other, and in which directions they can be extended. You are strongly encouraged to ask questions and discuss unclear points during lectures. During lectures there will also be activities such as “clicker” questions and problem-solving.
+
+In the computer labs (which will be integrated with the lectures) you will use Mathematica to simulate the dynamics of several dynamical systems and to visualize the results. The purpose of the labs is to make more concrete the, often abstract, theoretical concepts that we will discuss in the lectures and to introduce an element of play, that is essential for getting an intuitive feeling of different dynamical behaviors. An introduction to Mathematica will be given. 
+
+The assessment of the learning objectives will be performed through a combination of homework assignments, exams (midterm and final), and an applied project. Computer labs will not be graded separately.
+
+There will be 6 homework assignments. The purpose of the homework assignments is to make you actively think about the covered material and to assess your progress, providing also signs on how well the learning objectives are attained throughout the teaching session. You will receive feedback on your homework assignments and the answers will be made available through Sakai. The style of the problems in the homework assignments will be similar to the style of the problems in the midterm and final exams.
+
+The midterm exam will assess learning objectives related to linear systems, while the final exam will assess learning objectives for the whole course, but the emphasis will be on nonlinear systems.
+
+In the applied project you will work in groups to understand a specific dynamical system by setting up a plan on how to study its dynamics, performing the analysis of the dynamics, and presenting your results through an oral presentation and a written report. The purpose of the applied project is to let you decide for a given dynamical system which of the results and techniques can be applied to study its dynamics and thus let you progress from passively understanding the material to actively using it. 
+
+For the applied project you will work in groups of 3-4 students. Each project will be assessed through an oral presentation (20 minutes) and a written report (about 10 pages in length). The presentation and the report must be able to demonstrate that you understand what are the relevant concepts to apply in the study of your system.  In the first week we will discuss some possible topics for the projects. You will be able to either select your topic from a list that will be put on Sakai before the beginning of the course or come up with your own topic in consultation with the instructor. By the end of the second week you will need to form groups and submit a project proposal. In the following weeks you will work on different parts of the project report and presentation by submitting the literature review (week 3), describing the main questions you plan to consider and your motivation (week 4), writing and running code and studying the relevant theory (weeks 5, 6) and preparing the final report (overall structure, introduction, and conclusions, in week 7). There will be two presentations. The first one, covering literature review and main questions / motivation will take place in week 4 and will be strictly for receiving feedback from me and your fellow students. The final presentation in week 7 will be graded. The rubrics for the presentation and the written report and more specific guidance on completing these will be made available.
+
+Finally, you should make ample use of office hours and other opportunities to interact and ask questions (e.g., Sakai forums). If the given office hours do not work for you, send me an e-mail to arrange an appointment. My role is to guide and support your learning — do not hesitate to come to me with your questions and comments.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{How can I prepare for the class sessions to be successful?}
+
+To prepare for the course:
+\begin{itemize}[label={-},noitemsep]
+\item Review the material from MATH 202 Linear Algebra concerning eigenvalues, eigenvectors, similarity transformations, and diagonalization of matrices.
+\item Install Mathematica on your laptop and get an Overleaf account.
+\end{itemize}
+
+To prepare for class meetings:
+\begin{itemize}[label={-},noitemsep]
+\item Make sure that you have a thorough understanding of the material covered in previous sessions and prepare a list of questions concerning aspects of the material that is still unclear. You can ask these questions during the following session or during office hours.
+\item Read carefully through the corresponding upcoming sections in the textbook (the lecture schedule is given later in this syllabus) and prepare questions to ask during the lectures. I will briefly review this material in every lecture but will not go through every point in detail.  
+\item Study auxiliary resources (for example, videos) that will be communicated to you through Sakai before the lectures.
+\item Bring your laptop to class.
+\item At the beginning of every part of the course (see the schedule later in the syllabus) I will hand out a reading guide about the material that you should focus on. I expect that you come to the class meetings having gone through the reading guide, having read the corresponding sections from the textbook, and having watched any required videos.
+\end{itemize}
+
+To prepare for the applied project:
+\begin{itemize}[label={-},noitemsep]
+\item Make sure that you know how to produce a written report and a presentation with many equations and mathematical symbols by using LaTeX.
+\item If you have taken WOC 203 and WOC 204 review what you have learned there about scientific writing and giving effective presentations.
+\end{itemize}
+
+To prepare for the midterm and final exams:
+\begin{itemize}[label={-},noitemsep]
+\item Review the solved problems from homework assignments and the problems solved in class. Make sure that you have mastered the problems. You can check this by being able to solve the problems without checking at all the given solutions.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What required texts, materials, and equipment will I need?}
+
+The (required) textbook for the course is:
+
+R. K. Nagle, E. B. Saff, and A. D. Snider. Fundamentals of Differential Equations and Boundary Value Problems, 7th edition, Pearson (2017). ISBN: 9780321977175
+\href{https://www.pearson.com/store/p/fundamentals-of-differential-equations-and-boundary-value-problems/P100002446580}{[Webpage]}
+
+Moreover, it is required to:
+\begin{itemize}[label={-},noitemsep]
+\item Install Mathematica on your laptop — it is available from \url{https://software.duke.edu}.
+\item Get a (free) Overleaf account. 
+\item Bring your laptop to every class.
+\end{itemize}
+
+Some online resources for learning Mathematica include:
+\begin{itemize}[label={-},noitemsep]
+\item \href{https://www.wolfram.com/language/fast-introduction-for-math-students/en/}{Fast Introduction for Math Students}, especially the section on \href{https://www.wolfram.com/language/fast-introduction-for-math-students/en/differential-equations/}{Differential Equations}.
+\item \href{https://www.wolfram.com/wolfram-u/catalog/gen005/}{Hands-on Start to Mathematica Video}.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What optional texts or resources might be helpful?}
+
+\subsection{Other material}
+
+\push J. Gleick, Chaos: Making a New Science, Viking Books, 1987. \\
+A fascinating exposition of the development and content of the theory of Dynamical Systems and Chaos.
+
+\push 3Blue1Brown’s Differential Equations series of videos on YouTube. \\
+A great series of videos concerning differential equations focusing on the dynamical systems aspects. The videos contain several clear visualizations of many of the concepts that we will cover in this course.
+
+\push S. Lynch, Dynamical Systems with Applications using Mathematica®, 2nd edition, Birkhäuser, 2017. \\
+A comprehensive book explaining how to use Mathematica for the study of dynamical systems.
+
+\subsection{Texts at similar level}
+
+\push W. E. Boyce and R. C. DiPrima, Elementary Differential Equations and Boundary Value Problems, 10th edition, Wiley, 2012. \\
+A book focusing on the basic theory and on solving different types of differential equations. It is well written, but it only briefly discusses dynamical systems. 
+
+\push S. H. Strogatz, Nonlinear Dynamics and Chaos, 2nd edition, CRC Press, 2014. \\
+A great book on dynamical systems. It has several nice examples of applications of dynamical systems and I plan to “borrow” some of them for the course.
+
+\push M. W. Hirsch, S. Smale, R. L. Devaney. Differential Equations, Dynamical Systems, and an Introduction to Chaos, 3rd edition, Academic Press, 2012. \\
+The book is available in China as DRM-free e-book (PDF, Mobi, EPub). 
+
+
+\subsection{Advanced texts}
+
+\push V. I. Arnol’d, Ordinary Differential Equations, 3rd edition, Springer, 1992. \\
+This is a beautiful, more advanced, book on the theory of dynamical systems from one of the most famous mathematicians who worked in the field. The book puts a heavy emphasis on the geometric aspects of the theory, discussing vector fields, flows, and symmetries in the first part, and closing with dynamical systems on manifolds.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{How will my grade be determined?}
+
+The grade will be determined through the following graded assessments:
+
+\begin{itemize}[label={-},noitemsep]
+  \item Homework assignments (25\% of final grade; 6 compulsory homework assignments; 5 best out of 6). 
+  \item Midterm exam (20\% of final grade).
+  \item Applied project presentation (10\% of final grade).
+  \item Applied project written report (20\% of final grade).
+  \item Final exam (25\% of final grade).
+\end{itemize}
+
+\subsection{Grading scale}
+
+%\begin{center}
+%\begin{tabular}{ll}
+%\toprule
+%Grade & \text{Percentage (p)} \\
+%\midrule
+%A+ & 97\% ≤ p ≤ 100\% \\
+%A  & 93\% ≤ p < 97\% \\
+%A- & 90\% ≤ p < 93\% \\
+%B+ & 87\% ≤ p < 90\% \\
+%B  & 83\% ≤ p < 87\% \\
+%B- & 80\% ≤ p < 83\% \\
+%C+ & 77\% ≤ p < 80\% \\
+%C  & 73\% ≤ p < 77\% \\
+%C- & 70\% ≤ p < 73\% \\
+%D+ & 67\% ≤ p < 70\% \\
+%D  & 63\% ≤ p < 67\% \\
+%D- & 60\% ≤ p < 63\% \\
+%F  & p < 60\% \\
+%\bottomrule
+%\end{tabular}
+%\end{center}
+
+%\begin{center}
+%%
+%\begin{tabular}[t]{ll}
+%\toprule
+%Grade & \text{Percentage (p)} \\
+%\midrule
+%D+ & 67\% ≤ p < 70\% \\
+%D  & 63\% ≤ p < 67\% \\
+%D- & 60\% ≤ p < 63\% \\
+%F  & p < 60\% 
+%\end{tabular}
+%%
+%\begin{tabular}[t]{ll}
+%\toprule
+%Grade & \text{Percentage (p)} \\
+%\midrule
+%C+ & 77\% ≤ p < 80\% \\
+%C  & 73\% ≤ p < 77\% \\
+%C- & 70\% ≤ p < 73\% 
+%\end{tabular}
+%%
+%\begin{tabular}[t]{ll}
+%\toprule
+%Grade & \text{Percentage (p)} \\
+%\midrule
+%B+ & 87\% ≤ p < 90\% \\
+%B  & 83\% ≤ p < 87\% \\
+%B- & 80\% ≤ p < 83\% 
+%\end{tabular}
+%%
+%\begin{tabular}[t]{ll}
+%\toprule
+%Grade & \text{Percentage (p)} \\
+%\midrule
+%A+ & 97\% ≤ p ≤ 100\% \\
+%A  & 93\% ≤ p < 97\% \\
+%A- & 90\% ≤ p < 93\% 
+%\end{tabular}
+%%
+%\end{center}
+
+\begin{center}
+\begin{tabular}[t]{llllllll}
+\toprule
+Grade & \text{Percentage (p)} &
+Grade & \text{Percentage (p)} & 
+Grade & \text{Percentage (p)} & 
+Grade & \text{Percentage (p)} \\
+\midrule
+D+ & 67\% ≤ p < 70\% &
+C+ & 77\% ≤ p < 80\% &
+B+ & 87\% ≤ p < 90\% &
+A+ & 87\% ≤ p ≤ 100\%
+\\
+D  & 63\% ≤ p < 67\% &
+C  & 73\% ≤ p < 77\% &
+B  & 83\% ≤ p < 87\% &
+A  & 93\% ≤ p < 97\%
+\\
+D- & 60\% ≤ p < 63\% &
+C- & 70\% ≤ p < 73\% &
+B- & 80\% ≤ p < 83\% &
+A- & 90\% ≤ p < 93\% 
+\\
+F & p < 60\% & & & & & & 
+\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What are the course policies?}
+
+\subsection{Assignment deadlines}
+
+All homework assignments and the final version of the applied project written report should be handed-in by the announced deadline; late submissions will not be graded. 
+
+\subsection{Academic Integrity}
+
+As a student, you should abide by the academic honesty standard of the Duke Kunshan University. Its Community Standard states: “Duke Kunshan University is a community comprised of individuals from diverse cultures and backgrounds.  We are dedicated to scholarship, leadership, and service and to the principles of honesty, fairness, respect, and accountability. Members of this community commit to reflecting upon and upholding these principles in all academic and non-academic endeavors, and to protecting and promoting a culture of integrity and trust.”
+
+\subsection{Academic Policy \& Procedures}
+
+You are responsible for knowing and adhering to academic policy and procedures as published in University Bulletin and Student Handbook. Please note, an incident of behavioral infraction or academic dishonesty (cheating on a test, plagiarizing, etc.) will result in immediate action from me, in consultation with university administration (e.g., Dean of Undergraduate Studies, Student Conduct, Academic Advising).  Please visit the Undergraduate Studies website for additional guidance related to academic policy and procedures.
+
+\subsection{Academic Disruptive Behavior and Community Standard}
+
+Please avoid all forms of disruptive behavior, including but not limited to: verbal or physical threats, repeated obscenities, unreasonable interference with class discussion, making/receiving personal phone calls, text messages or pages during class, excessive tardiness, leaving and entering class frequently without notice of illness or other extenuating circumstances, and persisting in disruptive personal conversations with other class members.  Please turn off phones, pagers, etc. during class unless instructed otherwise.  Laptop computers may be used only to take notes. If you choose not to adhere to these standards, I will take action in consultation with university administration (e.g., Dean of Undergraduate Studies, Student Conduct, Academic Advising).
+
+\subsection{Academic Accommodations}
+
+If you need to request accommodation for a disability, you need a signed accommodation plan from Campus Health Services, and you need to provide a copy of that plan to me. Visit the Office of Student Affairs website for additional information and instruction related to accommodations. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{What campus resources can help me during this course?}
+
+\subsection{Academic Advising and Student Support}
+Please consult with me about appropriate course preparation and readiness strategies, as needed.  Consult your academic advisors on course performance (i.e., poor grades) and academic decisions (e.g., course changes, incompletes, withdrawals) to ensure you stay on track with degree and graduation requirements. In addition to advisors, staff in the Academic Resource Center can provide recommendations on academic success strategies (e.g., tutoring, coaching, student learning preferences).  Please visit the Office of Undergraduate Advising website for additional information related to academic advising and student support services. 
+
+\subsection{Writing and Language Studio}
+If you want additional help with academic writing – and more generally with language learning – you are welcome to go to the Writing and Language Studio (WLS), located in the Conference Center. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{IT Support}
+
+If you are experiencing technical difficulties, please contact IT:
+\begin{itemize}[label={-},noitemsep]
+\item China-based faculty / staff / students 400-816-7100, (+86) 0512- 3665-7100
+\item US-based faculty/staff/students (+1) 919-660-1810
+\item International-based faculty/staff/students can use either telephone option (recommend using tools like Skype calling)
+\item Live Chat:  \url{https://oit.duke.edu/help}
+\item Email:  service-desk@dukekunshan.edu.cn
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What is the expected course schedule?}
+
+The numbers in the brackets under “class topic / unit name” below refer to sections in the course textbook. If the corresponding topic is not covered in the textbook than lecture notes will be provided.
+
+\setlength{\tabcolsep}{0pt}
+\newcolumntype{D}[1]{>{\small\raggedright\arraybackslash}p{#1\textwidth}}
+\newcommand{\KEmc}[4]{\multicolumn{#1}{>{\small#4\raggedright\arraybackslash}p{#2\textwidth}}{#3}}
+\newcommand{\KEPart}[1]{\midrule\KEmc{5}{1.0}{#1}{\bfseries\color{dku-blue}}\\ \midrule}
+\newcommand{\KEActivity}[2]{{\bfseries #1} & \KEmc{4}{0.75}{#2}{\itshape}}
+\setlength{\tabcolsep}{0pt}
+\setlength{\extrarowheight}{1pt}
+
+\begin{longtable}{D{0.25}D{0.25}D{0.2}D{0.15}D{0.15}}
+\arrayrulecolor{dku-blue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\rowcolor{dku-blue} {\color{white}\bfseries Class meetings} & {\color{white}\color{white}\bfseries Class topic/unit name }  & {\color{white}\color{white}\bfseries Pre-class work for students}  & {\color{white}\color{white}\bfseries Planned in-class activities}  & {\color{white}\color{white}\bfseries Assignments due} \\
+\endhead 
+
+\KEPart{Part 1 (Introduction)}
+
+Lecture 1 (Wed 6 Jan) & Course overview; what are differential equations and why are they useful?  & Read the syllabus & Lecture; Discussion &  \\
+Lecture 2 (Thu 7 Jan) & Mathematica & Install Mathematica and create an Overleaf account & Lecture; Discussion & \\ 
+
+\KEPart{Part 2 (Fundamentals of differential equations)}
+
+Lecture 3 (Mon 11 Jan) & Solutions and initial value problems (1.2);  & Review reading guide for part 2 & Lecture; Discussion & \\
+Lecture 4 (Tue 12 Jan) & Direction fields (1.3); The approximation method of Euler (1.4) &   & Lecture; Discussion & \\
+
+\KEPart{Part 3 (First-order differential equations)}
+
+Lecture 5 (Wed 13 Jan) & Separable equations (2.2); Linear equations (2.3); & Review reading guide for part 3 & Lecture; Discussion &  \\
+Lecture 6 (Thu 14 Jan) & Substitutions and transformations (2.6); &   & Lecture; Discussion & Written report: Project Proposal \\
+
+\KEPart{Part 4 (Linear equations)}
+
+Lecture 7 (Mon 18 Jan) & Homogeneous linear equations (4.2, 4.3); & Review reading guide for part 4 & Lecture; Discussion &  \\
+Lecture 8 (Tue 19 Jan) & Nonhomogeneous equations: the method of undetermined coefficients (4.4, 4.5); &   & Lecture; Discussion & Homework 1 \\
+Lecture 9 (Wed 20 Jan) & Mechanical vibrations (4.9, 4.10); &   & Lecture; Discussion &  \\
+Lecture 10 (Thu 21 Jan) & Higher order linear differential equations (6.1, 6.2); &  & Lecture; Discussion & Written report: Literature Review \\
+
+\KEPart{Part 5 (Systems and phase plane analysis)}
+
+Lecture 11 (Mon 25 Jan) & Dynamical systems point of view of first-order differential equations (notes); & Review reading guide for part 5 & Lecture; Discussion & \\
+Lecture 12 (Tue 26 Jan) & Introduction to the phase plane (5.4); &   & Lecture; Discussion &  Homework 2 \\
+Lecture 13 (Wed 27 Jan) & Applications (5.5, 5.6, 5.7);  &   & Lecture; Discussion & \\
+Lecture 14 (Thu 28 Jan) & Dynamical systems, Poincaré maps, and chaos (5.8); &   & Lecture; Discussion & Written report: Research Questions and Motivation \\
+\KEActivity{Midterm exam}{The midterm exam, covering material taught until lecture 12, will take place on Thursday 28 January} \\
+
+\KEPart{Part 6 (Linear systems)}
+
+Lecture 15 (Mon 1 Feb) & Linear systems (9.1, 9.4); & Review reading guide for part 6 & Lecture; Discussion &   \\
+Lecture 16 (Tue 2 Feb) & Linear systems with constant coefficients (9.5, 9.6); &   & Lecture; Discussion & Homework 3 \\
+Lecture 17 (Wed 3 Feb) & Matrix exponential (9.8); &  & Lecture; Discussion &  \\
+
+\KEPart{Part 7 (Stability of autonomous systems)}
+
+Lecture 18 (Thu 4 Feb) & Linear systems in the plane (12.2); & Review reading guide for part 7 & Lecture; Discussion &  Written report: Preliminary Research Results \\
+\KEActivity{Midterm presentations}{Presentations will take place on Thursday 4 February or Friday 5 February. These will not be graded but you will receive feedback.} \\
+Lecture 19 (Mon 8 Feb) & Almost linear systems (12.3); &  & Lecture; Discussion & \\ 
+Lecture 20 (Tue 9 Feb) & Energy methods (12.4); &  & Lecture; Discussion & Homework 4 \\
+Lecture 21 (Mon 22 Feb) & Lyapunov’s method (12.5); &  & Lecture; Discussion & \\
+Lecture 22 (Tue 23 Feb) & Limit cycles and periodic solutions (12.6); &  & Lecture; Discussion & \\
+Lecture 23 (Wed 24 Feb) & Stability of higher dimensional systems (12.7); &  & Lecture; Discussion &  \\
+
+\KEPart{Part 8 (Bifurcation theory)}
+
+Lecture 24 (Thu 25 Feb) & Introduction to bifurcations (notes); & Review reading guide for part 8 & Lecture; Discussion &
+Written report: Finalize Research Results and Conclusions \\
+Lecture 25 (Mon 1 Mar) & Saddle-node bifurcation, transcritical bifurcation (notes); &  & Lecture; Discussion & \\
+Lecture 26 (Tue 2 Mar) & Cusp bifurcation, Hopf bifurcation (notes); &  & Lecture; Discussion &  Homework 5 \\
+
+\KEPart{Part 9 (Review)}
+
+Lecture 27 (Wed 3 Mar) & Review  &  & Lecture; Discussion &  \\
+Lecture 28 (Thu 4 Mar) & Review  &  & Lecture; Discussion &  Homework 6 \\
+\KEActivity{Final Presentations}{Final presentations will take place on Friday 5 March 11:00 -- 14:00. These will determine the grade for your project presentations.} \\
+
+\KEPart{Exam week}
+
+\KEActivity{Final Exam}{The final exam will take place on Wednesday 10 March 8:30 -- 11:30 in AB 1079 and will cover material from the whole course.} \\
+\KEActivity{Written Project Report}{The final version of the written report will be due on Thursday 11 March.} \\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\bottomrule
+\end{longtable}
+
+
+\end{document}
