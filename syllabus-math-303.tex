@@ -21,14 +21,15 @@
 \usepackage{xunicode}
 \usepackage{xltxtra}
 \defaultfontfeatures{Mapping=tex-text,Numbers=Lining}
-% \newfontfamily\cnfont{Hiragino Sans GB}
 \AtBeginDocument{%
   \setmainfont{Carlito}%
   \setsansfont[
     BoldFont={Carlito}]{Carlito}%
   \raggedbottom%
 }
-% \usepackage[sf]{noto}
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Sans SC}
+\setCJKsansfont{Noto Sans SC}
 
 % Multi-language support
 \usepackage{polyglossia}
