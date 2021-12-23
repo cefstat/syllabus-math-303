@@ -52,12 +52,7 @@ hmargin=2cm,
 includefoot,foot=1.5cm,bmargin=2cm]{geometry}
 
 % Tabular
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\newcommand\gvrule{\color{lightgray}\vrule width 0.5pt}
-\renewcommand{\tabularxcolumn}[1]{m{#1}}
+\usepackage{tabularray}
 
 % Misc
 \usepackage{enumitem}
@@ -68,7 +63,7 @@ includefoot,foot=1.5cm,bmargin=2cm]{geometry}
 
 % Section titles
 \usepackage{titlesec}
-\titleformat{\section}{\raggedright\large\bfseries\color{dku-blue}}{}{0em}{}[{\titlerule[\heavyrulewidth]}]
+\titleformat{\section}{\raggedright\large\bfseries\color{dku-blue}}{}{0em}{}[{\titlerule[1pt]}]
 \titleformat{\subsection}{\raggedright\itshape\color{dku-blue}}{}{0em}{}
 
 
@@ -76,15 +71,16 @@ includefoot,foot=1.5cm,bmargin=2cm]{geometry}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{tabularx}{\textwidth}{Xm{6cm}}
-\arrayrulecolor{dku-blue}\toprule\vspace{6pt}
+\begin{tblr}{Q[co=2,l,m,colsep=0pt]Q[wd=6cm,r,m,colsep=0pt]}
+\hline[1pt,dku-blue,belowspace=12pt]
 {\bfseries\color{dku-blue}
- {\Large MATH 303} \newline\newline
- {\huge ODE and Dynamical Systems} \newline\newline
+ {\Large MATH 303} \\[12pt]
+ {\huge ODE and Dynamical Systems} \\[12pt]
  {\Large Spring 2022, Session 3}} 
-& \includegraphics[width=6cm]{dku-logo} \\
-\bottomrule
-\end{tabularx}
+& \parbox{6cm}{\includegraphics[width=6cm]{dku-logo}}
+\\[6pt]
+\hline[1pt,dku-blue,abovespace=12pt]
+\end{tblr}
 
 \vspace{1em}
 
@@ -284,16 +280,15 @@ The grade will be determined through the following graded assessments:
 
 \subsection{Grading scale}
 
-\newcolumntype{a}{>{\columncolor{dku-blue!20!white}}l}
-\newcolumntype{b}{>{\columncolor{dku-blue!10!white}}l}
-\newcommand{\bw}{\color{white}\bfseries}
-\begin{center}
-\begin{tabular}[t]{abababab}
-\rowcolor{dku-blue} 
-\bw Grade & \bw Percentage (p) &
-\bw Grade & \bw Percentage (p) &
-\bw Grade & \bw Percentage (p) &
-\bw Grade & \bw Percentage (p) \\
+\NewColumnType{A}{Q[co=-1,l,dku-blue!20!white]}
+\NewColumnType{B}{Q[co=1,l,dku-blue!10!white]}
+\begin{tblr}{width=\textwidth,
+             colspec={ABABABAB},
+             rowspec={Q[bg=dku-blue,fg=white,font=\bfseries]QQQQ}}
+Grade & Percentage (p) &
+Grade & Percentage (p) &
+Grade & Percentage (p) &
+Grade & Percentage (p) \\
 D+ & 67\% ≤ p < 70\% &
 C+ & 77\% ≤ p < 80\% &
 B+ & 87\% ≤ p < 90\% &
@@ -311,9 +306,7 @@ A- & 90\% ≤ p < 93\%
 \\
 F & p < 60\% & & & & & & 
 \\
-\end{tabular}
-\end{center}
-
+\end{tblr}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -393,30 +386,44 @@ If you are experiencing technical difficulties, please contact IT:
 
 The numbers in the brackets under ``class topic / unit name'' below refer to sections in the recommended course textbook. If the corresponding topic is not covered in the textbook then lecture notes will be provided.
 
-\setlength{\tabcolsep}{0pt}
-\newcolumntype{D}[1]{>{\small\raggedright\arraybackslash}p{#1\textwidth}}
-\newcommand{\KEmc}[4]{\multicolumn{#1}{>{\small#4\raggedright\arraybackslash}p{#2\textwidth}}{#3}}
-\newcommand{\KEPart}[1]{\midrule\KEmc{5}{1.0}{#1}{\bfseries\color{dku-blue}}\\ \midrule}
-\newcommand{\KEActivity}[2]{{\bfseries #1} & \KEmc{4}{0.82}{#2}{\itshape}}
-\newcommand{\KEActivityX}[3]{{\bfseries #1} & \KEmc{3}{0.67}{#2}{\itshape} & #3}
-\setlength{\tabcolsep}{0pt}
-\setlength{\extrarowheight}{1pt}
 
-\begin{longtable}{D{0.18}D{0.30}D{0.22}D{0.15}D{0.15}}
-\arrayrulecolor{dku-blue}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\rowcolor{dku-blue} {\color{white}\bfseries Class meetings} & {\color{white}\color{white}\bfseries Class topic/unit name }  & {\color{white}\color{white}\bfseries Pre-class work for students}  & {\color{white}\color{white}\bfseries Planned in-class activities}  & {\color{white}\color{white}\bfseries Assignments\newline due} \\
-\endhead 
+\NewTableCommand{\TblPart}{%
+\SetRow{fg=dku-blue, bg=dku-blue!10!white, font={\small\bfseries}}%
+\hline[4pt,white]%
+\SetCell[c=5]{l}}
 
-\KEPart{Part 1 (Fundamentals)}
+\DefTblrTemplate{contfoot}{default}{}
+\DefTblrTemplate{conthead}{default}{}
+\DefTblrTemplate{caption}{default}{}
+\DefTblrTemplate{capcont}{default}{}
 
-\#1 (Mon 10 Jan) & Course overview; what are differential equations and why are they useful?  & Read the syllabus \newline Watch \href{https://www.youtube.com/watch?v=p_di4Zn4wz4}{video} & Lecture; Discussion &  \\
+\begin{longtblr}[label=none]{
+  colspec = {
+    Q[co=18,font=\small,l]
+    Q[co=30,font=\small,l]
+    Q[co=20,font=\small,l]
+    Q[co=18,font=\small,l]
+    Q[co=14,font=\small,l]
+  }, 
+  width = \textwidth,
+  rowhead = 1, 
+  row{1} = {bg=dku-blue,fg=white,font={\small\bfseries}},
+  hspan = minimal
+}
+% Head
+Class meetings & Class topic/unit name & Pre-class work for students & Planned in-class activities &  Assignments due \\
+
+\TblPart{Part 1 (Fundamentals)} \\
+
+\#1 (Mon 10 Jan) & Course overview; what are differential equations and why are they useful?  & Read the syllabus \newline Watch \href{https://www.youtube.com/watch?v=p_di4Zn4wz4}{video} & Lecture; Discussion &   \\
+
 \#2 (Tue 11 Jan) & Introduction to Mathematica; & Install Mathematica and watch the video & Lecture; Discussion & \\ 
 
 \#3 (Wed 12 Jan) & Solutions and initial value problems (1.2); Direction fields (1.3); The approximation method of Euler (1.4); & Review reading guide for part 1 & Lecture; Discussion & \\
 
-\KEPart{Part 2 (First-order differential equations)}
+\TblPart Part 2 (First-order differential equations) \\
 
 \#4 (Thu 13 Jan) & Separable equations (2.2); Linear equations (2.3); & Review reading guide for part 2  & Lecture; Discussion & \\
 
@@ -428,7 +435,7 @@ The numbers in the brackets under ``class topic / unit name'' below refer to sec
 
 \#8 (Thu 20 Jan) & One-dimensional maps (notes); & & Lecture; Discussion & Homework 1 \\
 
-\KEPart{Part 3 (Linear differential equations)}
+\TblPart Part 3 (Linear differential equations) \\
 
 \#9 (Mon 24 Jan) & Homogeneous linear equations (4.2, 4.3); & Review reading guide for part 3 & Lecture; Discussion &  \\
 
@@ -436,22 +443,23 @@ The numbers in the brackets under ``class topic / unit name'' below refer to sec
 
 \#11 (Wed 26 Jan) & Higher order linear differential equations (6.1, 6.2); &  & Lecture; Discussion & Written report: Project Proposal \\
 
-\KEPart{Part 4 (Systems and phase plane analysis)}
+\TblPart Part 4 (Systems and phase plane analysis) \\
 
 \#12 (Thu 27 Jan) & Introduction to the phase plane (5.4); & Review reading guide for part 4 & Lecture; Discussion &  Homework 2 \\
 
 \\
-\rowcolor{red} \KEmc{5}{1.0}{\ 春节 (Spring Festival)}{\bfseries\color{white}} \\
+\SetCell[c=5]{bg=red, fg=white, font={\small\bfseries}}
+春节 (Spring Festival) \\
 \\
 
-
-\rowcolor{yellow} \KEActivity{\#13 (Mon 7 Feb)}{\textbf{Midterm exam 1.} The first midterm exam will cover material taught until lecture 11.} \\
+\SetRow{bg=yellow}
+\#13 (Mon 7 Feb) & \SetCell[c=4]{l} \textbf{Midterm exam 1.} The first midterm exam will cover material taught until lecture 11. & & & \\
 
 \#14 (Tue 8 Feb) & Examples and applications (5.4, 5.5, 5.6, 5.7);  &   & Lecture; Discussion & \\
 
 \#15 (Wed 9 Feb) & Dynamical systems, Poincaré maps, and chaos (5.8); &   & Lecture; Discussion & Written report: Literature Review  \\
 
-\KEPart{Part 5 (Linear systems)}
+\TblPart Part 5 (Linear systems) \\
 
 \#16 (Thu 10 Feb) & Linear systems (9.1, 9.4); & Review reading guide for part 5 & Lecture; Discussion & Homework 3 \\
 
@@ -459,11 +467,7 @@ The numbers in the brackets under ``class topic / unit name'' below refer to sec
 
 \#18 (Tue 15 Feb) & Matrix exponential (9.8); &  & Lecture; Discussion &  \\
 
-%\\
-%\rowcolor{red} \KEmc{5}{1.0}{\ Mid-Autumn Festival}{\bfseries\color{white}} \\
-%\\
-
-\KEPart{Part 6 (Planar autonomous systems)}
+\TblPart Part 6 (Planar autonomous systems) \\
 
 \#19 (Wed 16 Feb) & Linear systems in the plane (12.2); & Review reading guide for part 6 & Lecture; Discussion &  Written report: Research Questions and Motivation \\
 
@@ -475,37 +479,39 @@ The numbers in the brackets under ``class topic / unit name'' below refer to sec
 
 \#23 (Wed 23 Feb) & Limit cycles and periodic solutions (12.6); &  & Lecture; Discussion & \\
 
-\rowcolor{yellow} \KEActivityX{\#24 (Thu 24 Feb)}{\textbf{Practice presentations.} These will not be graded but you will receive feedback.}{Homework 5} \\
+\SetRow{bg=yellow}
+\hline[4pt,white] 
+\#24 (Thu 24 Feb) & \SetCell[c=3]{l} {\textbf{Practice presentations.} These will not be graded but you will receive feedback.} & & & Homework 5 \\
 
-%\\
-%\rowcolor{red} \KEmc{5}{1.0}{\ Chinese National Day Holiday}{\bfseries\color{white}} \\
-%\\
+\SetRow{bg=yellow}
+\hline[4pt,white]
+\#25 (Mon 28 Feb) & \SetCell[c=4]{l} \textbf{Midterm exam 2.} The second midterm exam will cover material taught until lecture 22. & & & \\
 
-\rowcolor{yellow} \KEActivity{\#25 (Mon 28 Feb)}{\textbf{Midterm exam 2.} The second midterm exam will cover material taught until lecture 22.} \\
-
-
-\KEPart{Part 7 (Bifurcation theory)}
+\TblPart Part 7 (Bifurcation theory) \\
 
 \#26 (Tue 1 Mar) & Introduction to bifurcations (notes); & Review reading guide for part 7 & Lecture; Discussion &  \\
 
 \#27 (Wed 2 Mar) & Saddle-node bifurcation, Hopf bifurcation (notes); &  & Lecture; Discussion &  Written report: Finalize Research Results and Conclusions
 \\
 
-\KEPart{Part 8 (Coda)}
+\TblPart Part 8 (Coda) \\
 
 \#28 (Thu 3 Mar) & Synthesis: How to analyze a dynamical system from scratch &  & Lecture; Discussion &  Homework 6 \\
 
-\rowcolor{yellow} \KEActivity{Final Presentations}{Final presentations will take place in the final week. The exact date and time will be announced later through Teams. These will determine the grade for your project presentations.} \\
+\SetRow{bg=yellow}
+\hline[4pt,white] 
+\textbf{Final Presentations} & \SetCell[c=4]{l} Final presentations will take place in the final week. The exact date and time will be announced later through Teams. These will determine the grade for your project presentations. & & & \\
 
-\KEPart{Exam week}
+\TblPart Exam week \\
 
-\KEActivity{Final Exam}{The date and place for the final exam will be announced later. } \\
-\KEActivity{Written Project Report}{The final version of the written report will be due sometime during the exam week. The exact date will be announced later.} \\
+\SetRow{bg=yellow}
+\hline[4pt,white] 
+\textbf{Final Exam} & \SetCell[c=4]{l} The date and place for the final exam will be announced later.  & & & \\
 
+\SetRow{bg=yellow}
+\hline[4pt,white] 
+\textbf{Written Project Report} & \SetCell[c=4]{l} The final version of the written report will be due sometime during the exam week. The exact date will be announced later. & & &
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\bottomrule
-\end{longtable}
-
+\end{longtblr}
 
 \end{document}
